@@ -72,11 +72,17 @@ def play(board, p=0):
             return play(board, 1)
         elif p == 1:
             return play(board, 0)
+    if input('Lagi? y/n\n') == 'y' or 'Y':
+        play(setboard())
 
-board = [[' ', ' ', ' '],
-         [' ', ' ', ' '],
-         [' ', ' ', ' ']]
+
+def setboard():
+    return ([[' ', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' ']])
+
+
 player = [0, 1]
 tanda = ['X', 'O']
 
-play(board)
+play(setboard())
