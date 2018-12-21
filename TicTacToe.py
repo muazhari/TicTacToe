@@ -45,7 +45,6 @@ class game:
         else:
             return None
 
-
     # Check if user input are available in board.
     def pinput(self, board, player):
         try:
