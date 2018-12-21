@@ -18,30 +18,29 @@ def groupList(xlen):
     return subList
 
 
-# Game Class
+# Game class.
 class game:
     def __init__(self):
         self.players = list()
-        self.tanda = list()
+        self.mark = list()
         self.count = None
         self.cc = None
 
     # Check board if player mark have filled.
     def check(self, board, player):
         if self.count < len(board)**2:
-            ptanda = [self.tanda[player]] * len(board)
+            pmark = [self.mark[player]] * len(board)
             diag1 = [board[i][i] for i in range(0, len(board))]
             diag2 = [board[i][-i - 1] for i in range(0, len(board))]
-            if diag1 == ptanda or diag2 == ptanda:
+            if diag1 == pmark or diag2 == pmark:
                 return True
             for i in range(0, len(board)):
-                baris = board[i]
-                kolom = [x[i] for x in board]
-                if baris == ptanda:
+                row = board[i]
+                col = [x[i] for x in board]
+                if row == pmark:
                     return True
-                elif kolom == ptanda:
+                elif col == pmark:
                     return True
-
             return False
         else:
             return None
@@ -49,26 +48,26 @@ class game:
     # Check if user input are available in board.
     def pinput(self, board, player):
         try:
-            uinput = int(input('Hei Player {} ({}) masukan 1-{}\n'
+            uinput = int(input('Hey Player {} ({}) input 1-{}\n'
                                .format(
                                    self.players[player],
-                                   self.tanda[player],
+                                   self.mark[player],
                                    len(board)**2)))
             # col x raw
-            if (board[self.cc[uinput][0]][self.cc[uinput][1]]) not in self.tanda:
-                board[self.cc[uinput][0]][self.cc[uinput][1]] = self.tanda[player]
+            if (board[self.cc[uinput][0]][self.cc[uinput][1]]) not in self.mark:
+                board[self.cc[uinput][0]][self.cc[uinput][1]] = self.mark[player]
                 return board
             else:
                 self.display(board)
-                print('Sudah terisi! Input yg benar!')
+                print('Filled up! Input to an available ones!')
                 return self.pinput(board, player)
         except ValueError:
             self.display(board)
-            print('Jangan Kosong! Input yg benar!')
+            print('Don\'t Empty! Correct your input!')
             return self.pinput(board, player)
         except IndexError and KeyError:
             self.display(board)
-            print('Input yg benar!')
+            print('Wrong Input!')
             return self.pinput(board, player)
 
     # Iterate over board and draw it.
@@ -86,17 +85,17 @@ class game:
         board = self.pinput(board, p)
         if self.check(board, p):
             self.display(board)
-            print('Selamat Player {}! Anda Menang!'.format(self.players[p]))
+            print('Congrats Player {}! You Win!'.format(self.players[p]))
         elif self.check(board, p) is None:
             self.display(board)
-            print('Yah ga ada yang menang...')
+            print('No one win...')
         else:
             self.count += 1
             if p == 0:
                 return self.play(board, 1)
             elif p == 1:
                 return self.play(board, 0)
-        if input('Lagi? y/n\n') == 'y' and 'Y':
+        if input('Do again? y/n\n') == 'y' and 'Y':
             self.play(self.setboard(len(board)))
 
     # Define board in n*n size.
@@ -113,6 +112,6 @@ class game:
 if __name__ == "__main__":
     tictactoe = game()
     board = tictactoe.setboard(5, num='y')
-    tictactoe.players = ['Aku', 'Kamu']
-    tictactoe.tanda = ['X', 'O']
+    tictactoe.players = ['Tom', 'Jerry']
+    tictactoe.mark = ['X', 'O']
     start = tictactoe.play(board)
