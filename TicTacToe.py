@@ -72,6 +72,7 @@ class game:
 
     # Iterate over board and draw it.
     def display(self, board):
+        # Edit line multiplier if not match to the boxes, i don't know why it depends on a terminal is used.
         print('\n-' + '--------' * 2 * len(board))
         for i in range(0, len(board)):
             print('|\t\t' * len(board) + '|')
