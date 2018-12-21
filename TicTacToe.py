@@ -22,28 +22,29 @@ def groupList(xlen):
 class game:
     def __init__(self):
         self.players = list()
-        self.mark = list()
+        self.marks = list()
         self.count = None
         self.cc = None
 
-    # Check board if player mark have filled.
+    # Check board if player marks have filled.
     def check(self, board, player):
         if self.count < len(board)**2:
-            pmark = [self.mark[player]] * len(board)
+            pmarks = [self.marks[player]] * len(board)
             diag1 = [board[i][i] for i in range(0, len(board))]
             diag2 = [board[i][-i - 1] for i in range(0, len(board))]
-            if diag1 == pmark or diag2 == pmark:
+            if diag1 == pmarks or diag2 == pmarks:
                 return True
             for i in range(0, len(board)):
                 row = board[i]
                 col = [x[i] for x in board]
-                if row == pmark:
+                if row == pmarks:
                     return True
-                elif col == pmark:
+                elif col == pmarks:
                     return True
             return False
         else:
             return None
+
 
     # Check if user input are available in board.
     def pinput(self, board, player):
@@ -51,11 +52,11 @@ class game:
             uinput = int(input('Hey Player {} ({}) input 1-{}\n'
                                .format(
                                    self.players[player],
-                                   self.mark[player],
+                                   self.marks[player],
                                    len(board)**2)))
             # col x raw
-            if (board[self.cc[uinput][0]][self.cc[uinput][1]]) not in self.mark:
-                board[self.cc[uinput][0]][self.cc[uinput][1]] = self.mark[player]
+            if (board[self.cc[uinput][0]][self.cc[uinput][1]]) not in self.marks:
+                board[self.cc[uinput][0]][self.cc[uinput][1]] = self.marks[player]
                 return board
             else:
                 self.display(board)
@@ -113,5 +114,5 @@ if __name__ == "__main__":
     tictactoe = game()
     board = tictactoe.setboard(5, num='y')
     tictactoe.players = ['Tom', 'Jerry']
-    tictactoe.mark = ['X', 'O']
+    tictactoe.marks = ['X', 'O']
     start = tictactoe.play(board)
