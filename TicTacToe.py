@@ -46,7 +46,6 @@ class game:
             return None
 
     # Check if user input are available in board.
-<<<<<<< HEAD
     def pinput(self, board, player, dip=None):
         try:
             if dip is None:
@@ -57,15 +56,6 @@ class game:
                                        len(board)**2)))
             elif dip is not None:
                 uinput = dip
-=======
-    def pinput(self, board, player):
-        try:
-            uinput = int(input('Hey Player {} ({}) input 1-{}\n'
-                               .format(
-                                   self.players[player],
-                                   self.marks[player],
-                                   len(board)**2)))
->>>>>>> ca0aa99877acaee1560be33d8159d5ad3220279f
             # col x raw
             if (board[self.cc[uinput][0]][self.cc[uinput][1]]) not in self.marks:
                 board[self.cc[uinput][0]][self.cc[uinput][1]] = self.marks[player]
@@ -94,7 +84,6 @@ class game:
             print('-' + '--------' * 2 * len(board))
 
     # Alternately checking playing status.
-<<<<<<< HEAD
     def play(self, board, p=0, di=None):
         if di is not None:
             board = self.pinput(board, p, di[self.count])
@@ -116,23 +105,6 @@ class game:
                 return self.play(board, 0, di)
         if di is not None:
             return [p, status, self.count]
-=======
-    def play(self, board, p=0):
-        self.display(board)
-        board = self.pinput(board, p)
-        if self.check(board, p):
-            self.display(board)
-            print('Congrats Player {}! You Win!'.format(self.players[p]))
-        elif self.check(board, p) is None:
-            self.display(board)
-            print('No one win...')
-        else:
-            self.count += 1
-            if p == 0:
-                return self.play(board, 1)
-            elif p == 1:
-                return self.play(board, 0)
->>>>>>> ca0aa99877acaee1560be33d8159d5ad3220279f
         if input('Do again? y/n\n') == 'y' and 'Y':
             self.play(self.setboard(len(board)))
 
@@ -150,12 +122,7 @@ class game:
 if __name__ == "__main__":
     tictactoe = game()
     # tictactoe.setboard(How_big_the_Board, Display_numbers?)
-<<<<<<< HEAD
     board = tictactoe.setboard(3, num='y')
     tictactoe.players = ['Aku', 'Kamu']
-=======
-    board = tictactoe.setboard(5, num='y')
-    tictactoe.players = ['Tom', 'Jerry']
->>>>>>> ca0aa99877acaee1560be33d8159d5ad3220279f
     tictactoe.marks = ['X', 'O']
     start = tictactoe.play(board)
