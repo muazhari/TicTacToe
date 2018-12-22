@@ -1,7 +1,6 @@
 import TicTacToe
 import numpy as np
 import pandas as pd
-from scipy.special import factorial
 from sympy.utilities.iterables import multiset_permutations
 
 
