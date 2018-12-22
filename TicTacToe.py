@@ -23,12 +23,13 @@ class game:
     def __init__(self):
         self.players = list()
         self.marks = list()
-        self.count = None
-        self.cc = None
+        self.count = int()
+        self.cc = dict()
+
 
     # Check board if player marks have filled.
     def check(self, board, player):
-        if self.count < len(board)**2 - 1:
+        if self.count < len(board)**2:
             pmarks = [self.marks[player]] * len(board)
             diag1 = [board[i][i] for i in range(0, len(board))]
             diag2 = [board[i][-i - 1] for i in range(0, len(board))]
@@ -48,14 +49,14 @@ class game:
     # Check if user input are available in board.
     def pinput(self, board, player, dip=None):
         try:
-            if dip is None:
+            if dip is not None:
+                uinput = dip
+            else:
                 uinput = int(input('Hey Player {} ({}) input 1-{}\n'
                                    .format(
                                        self.players[player],
                                        self.marks[player],
                                        len(board)**2)))
-            elif dip is not None:
-                uinput = dip
             # col x raw
             if (board[self.cc[uinput][0]][self.cc[uinput][1]]) not in self.marks:
                 board[self.cc[uinput][0]][self.cc[uinput][1]] = self.marks[player]
@@ -85,9 +86,10 @@ class game:
 
     # Alternately checking playing status.
     def play(self, board, p=0, di=None):
+        self.count += 1
         if di is not None:
-            board = self.pinput(board, p, di[self.count])
-        elif di is None:
+            board = self.pinput(board, p, di[self.count - 1])
+        else:
             self.display(board)
             board = self.pinput(board, p)
         status = self.check(board, p)
@@ -98,7 +100,6 @@ class game:
             self.display(board)
             print('Congrats Player {}! You Win!'.format(self.players[p]))
         else:
-            self.count += 1
             if p == 0:
                 return self.play(board, 1, di)
             elif p == 1:
