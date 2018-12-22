@@ -30,7 +30,7 @@ def main():
         elif start[1] is None:
             start[1] = 'Draw'
 
-        start = start + [p] + [p[:start[2]+1]]
+        start = start + [p] + [p[:start[2]]]
 
         start.pop(2)
 
