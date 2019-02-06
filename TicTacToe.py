@@ -29,7 +29,7 @@ class game:
 
     # Check board if player marks have filled.
     def check(self, board, player):
-        if self.count < len(board)**2:
+        if self.count < len(board)**2 + 1:
             pmarks = [self.marks[player]] * len(board)
             diag1 = [board[i][i] for i in range(0, len(board))]
             diag2 = [board[i][-i - 1] for i in range(0, len(board))]
